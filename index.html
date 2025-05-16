@@ -15,24 +15,27 @@
       <div class="text-lg text-neutral-100 grow-0">This is a small hub-page that i use as a start page for my browser</div>
     </div>
 
-    <div id="txt"></div>
+    <div id="clock"></div>
 
     <script>
-    function startTime() {
-      const today = new Date();
-      let h = today.getHours();
-      let m = today.getMinutes();
-      let s = today.getSeconds();
-      m = checkTime(m);
-      s = checkTime(s);
-      document.getElementById('txt').innerHTML =  h + ":" + m + ":" + s;
-      setTimeout(startTime, 1000);
-    }
+    const timeElement = document.getElementById("clock");
+
+    function updateTime() {
+        const now = new Date();
+        const hours = now.getHours();
+        const minutes = now.getMinutes();
+        const seconds = now.getSeconds();
     
-    function checkTime(i) {
-      if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
-      return i;
+        // Format the string with leading zeroes
+        const clockStr = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    
+        timeElement.innerText = clockStr;
+    
+        // Set a timeout for one minute
+        setTimeout(updateTime, 60000);
     }
+
+updateTime();
     </script>
   </body>
 </html>
